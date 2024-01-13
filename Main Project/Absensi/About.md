@@ -1,1 +1,0 @@
-Apa aja nanti deh
