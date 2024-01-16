@@ -1,12 +1,13 @@
 #include <ESP8266WiFi.h>
+#include <ESP8266Firebase.h>
 #include <WiFiClient.h>
-#include <FirebaseArduino.h>
 
 #define ssid "Co Breakout"
 #define password "PowerPoint"
-#define Firebase_Host "https://console.firebase.google.com/project/foras-d8f7b/database/foras-d8f7b-default-rtdb/data/~2F"
+#define Firebase_Host "https://foras-d8f7b-default-rtdb.asia-southeast1.firebasedatabase.app/"
 #define Firebase_Auth "s7Wl7N2FRYyVbfsPz5GuWjyaj4OKhCRhp7DDEEzd"
 
+Firebase firebase(Firebase_Host);
 
 void setup() {
   Serial.begin(115200);
@@ -22,7 +23,7 @@ void setup() {
   Serial.print("connected: ");
   Serial.println(WiFi.localIP());
   
-  Firebase.begin(Firebase_Host, Firebase_Auth);
+  firebase.setFloat("Example/setFloat", 45.390);
 }
 
 void loop() {
