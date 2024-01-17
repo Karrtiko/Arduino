@@ -9,24 +9,26 @@
 
 Firebase firebase(Firebase_Host);
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
   // pinMode(LED_BUILTIN, OUTPUT);
   // digitalWrite(LED_BUILTIN, LOW);
-  WiFi.begin(ssid,password);
+  WiFi.begin(ssid, password);
   Serial.print("connecting");
-  while (WiFi.status() != WL_CONNECTED) {
+  while (WiFi.status() != WL_CONNECTED)
+  {
     Serial.print(".");
     delay(500);
   }
   Serial.println();
   Serial.print("connected: ");
   Serial.println(WiFi.localIP());
-  
+
   firebase.setFloat("Example/setFloat", 45.390);
 }
 
-void loop() {
+void loop()
+{
   // put your main code here, to run repeatedly:
-
 }
