@@ -3,13 +3,8 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
 
-#ifndef STASSID
-#define STASSID "Co Breakout"
-#define STAPSK "PowerPoint"
-#endif
-
-const char *ssid = STASSID;
-const char *password = STAPSK;
+String ssid = "Co Breakout";
+String password = "PowerPoint";
 
 ESP8266WebServer server(80);
 
