@@ -1,19 +1,17 @@
-// ==========Import Libraries===========
+// ======Import Libraries================
 #include <WiFiClient.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266Firebase.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
-// =========Variable=============
-String ssid = "Co Breakout";
-String password = "PowerPoint";
+// ===== Variable========================
+String ssid = "Come";
+String password = "huhuhuhu";
 ESP8266WebServer server(80);
-// End Variabel
-//==================================
-// Function Connect Wifi
+// ===== Function Connect Wifi ===========
 void connect_wifi()
 {
-    WiFi.getmode(WiFi.STATION);
+    WiFi.mode(WIFI_STA);
     WiFi.begin(ssid, password);
     Serial.print("connecting");
     while (WiFi.status() != WL_CONNECTED)
@@ -21,21 +19,36 @@ void connect_wifi()
         Serial.print("*");
         delay(1000);
     }
+    Serial.print("Connected to");
+    Serial.print(ssid);
+    Serial.print("IP address : ");
+    Serial.println(WiFi.localIP());
 }
-// End Connect WiFI
-// =================================
+// ===== MDNS Server ====================
+void mdns()
+{
+    if (MDNS.begin("esp8266"))
+    {
+        Serial.print("MDNS started");
+    }
+}
+// ===== Web Server =====================
+void webserver()
+{
+    server.begin();
+    Serial.print("web server Berjalan");
+}
+// ===== Setup =========================
 void setup()
 {
-    connect_wifi();
     Serial.begin(115200);
-
-    server.on("/", []()
-              { server.send(200, "text/plain", "Hello Para Warrior IoT"); });
-    server.begin();
-    Serial.print("Web Server Berjalan");
+    connect_wifi();
+    webserver();
+    mdns();
 }
-
+// ===== Loop ===================
 void loop()
 {
-    // server.handleClient();
+    MDNS.update();
+    server.handleClient();
 }
